@@ -13,18 +13,40 @@ Please read the [Fixing Bugs](https://docs.google.com/document/d/1hRccxYhoRVatB9
 
 Please read [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect)
 
+For example:
+
+🔴 Don't:
+```
+function Form() {
+  const [firstName, setFirstName] = useState('Taylor');
+  const [lastName, setLastName] = useState('Swift');
+
+  // 🔴 Avoid: redundant state and unnecessary Effect
+  const [fullName, setFullName] = useState('');
+  useEffect(() => {
+    setFullName(firstName + ' ' + lastName);
+  }, [firstName, lastName]);
+  // ...
+}
+```
+
+✅ Do:
+```
+function Form() {
+  const [firstName, setFirstName] = useState('Taylor');
+  const [lastName, setLastName] = useState('Swift');
+  // ✅ Good: calculated during rendering
+  const fullName = firstName + ' ' + lastName;
+  // ...
+}
+```
+
+
 ## Python
 
 ### Use list comprehensions and other "pythonic" syntax
 
-Do:
-```
-sample_list = [1, 2, 3]
-doubled = [item * 2 for item in sample_list]
-```
-
-
-Don't:
+🔴 Don't:
 ```
 sample_list = [1, 2, 3]
 doubled = []
@@ -32,17 +54,26 @@ for item in sample_list:
     doubled.append(item * 2)
 ```
 
-### When keying into dictionaries, use `.get` as safer alternative
-Do:
+✅ Do:
+```
+sample_list = [1, 2, 3]
+doubled = [item * 2 for item in sample_list]
+```
+
+
+### When keying into dictionaries, use `.get` as a safer alternative
+
+🔴 Don't:
+```
+sample_dict = {}
+value = sample_dict["test_key"] # KeyError
+```
+
+✅ Do:
 ```
 sample_dict = {}
 value = sample_dict.get("test_key")
 print(value) # None
-```
-Don't:
-```
-sample_dict = {}
-value = sample_dict["test_key"] # KeyError
 ```
 
 ## Git
