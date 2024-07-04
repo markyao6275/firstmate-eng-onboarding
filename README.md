@@ -83,13 +83,20 @@ print(value) # None
 In general, an effective pull request (PR) makes it easy for the reviewer to understand and approve the change. You should 
 
 1. Always include the following in the PR description
-   a. Context of the problem (if fixing bug) or requirements (if implementing a feature)
-   b. Brief description of change (how you solved the bug / implemented the feature)
-   c. Evidence of testing (screenshots, screen recordings, log output)
+   
+    a. Context of the problem (if fixing bug) or requirements (if implementing a feature)
+
+    b. Brief description of change (how you solved the bug / implemented the feature)
+
+    c. Evidence of testing (screenshots, screen recordings, log output)
+
 2. If you're unsure about how you implemented something, mention it in a code comment or PR comment
 3. Make sure the commit history is clean (use `rebase` and `commit --amend` to keep commit history clean)
-   a. Not too many commits (commits like "cleanup", "fixing tests" can often be squashed into the previous commit)
-   b. Changes to address PR comments should be in their own commit, so that the reviewer can see those changes on their own (and not review the entire PR again)
+
+    a. Not too many commits (commits like "cleanup", "fixing tests" can often be squashed into the previous commit)
+
+    b. Changes to address PR comments should be in their own commit, so that the reviewer can see those changes on their own (and not review the entire PR again)
+
 4. Proofread your change before sending to the review. Check for random `console.log`s, test code, commented out code etc.
 
 ### Cleaning Commit History
