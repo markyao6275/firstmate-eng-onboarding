@@ -72,12 +72,8 @@ const NameEditor = (props: {
   } = props;
   const [firstName, setFirstName] = useState<string>(fetchedFirstName || "");
   const [lastName, setLastName] = useState<string>(fetchedLastName || "");
-  const [fullName, setFullName] = useState<string | null>(null);
 
-  useEffect(() => {
-    setFullName(`${firstName} ${lastName}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const fullName = `${fetchedFirstName || ""} ${fetchedLastName || ""}`.trim()
 
   return (
     <div>
