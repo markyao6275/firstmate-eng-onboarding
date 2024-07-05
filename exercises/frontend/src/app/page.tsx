@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const Home = () => {
-  const [firstName, setFirstName] = useState<string | null>(null);
-  const [lastName, setLastName] = useState<string | null>(null);
+  const [fetchedFirstName, setFetchedFirstName] = useState<string | null>(null);
+  const [fetchedLastName, setFetchedLastName] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchSavedNames = async () => {
@@ -19,8 +19,8 @@ export const Home = () => {
       });
       const data = await response.json();
       const { first_name: firstName, last_name: lastName } = data;
-      setFirstName(firstName);
-      setLastName(lastName);
+      setFetchedFirstName(firstName);
+      setFetchedLastName(lastName);
       return data;
     } catch (e) {
       console.error(e);
@@ -29,7 +29,7 @@ export const Home = () => {
     }
   }
 
-  const saveNames = async () => {
+  const saveNames = async (firstName: string, lastName: string) => {
     const response = await fetch(`${SERVER_URL}/api/names`, {
       method: "POST",
       headers: {
@@ -38,8 +38,8 @@ export const Home = () => {
       body: JSON.stringify({ first_name: firstName, last_name: lastName })
     });
     const data = await response.json();
-    setFirstName(data.first_name);
-    setLastName(data.last_name);
+    setFetchedFirstName(data.first_name);
+    setFetchedLastName(data.last_name);
   }
 
   useEffect(() => {
@@ -50,10 +50,8 @@ export const Home = () => {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       { !isLoading && (
         <NameEditor
-          firstName={firstName}
-          setFirstName={setFirstName}
-          lastName={lastName}
-          setLastName={setLastName}
+          fetchedFirstName={fetchedFirstName}
+          fetchedLastName={fetchedLastName}
           onSaveNames={saveNames}
         />
       )
@@ -63,19 +61,17 @@ export const Home = () => {
 }
 
 const NameEditor = (props: {
-  firstName: string | null,
-  setFirstName: (firstName: string) => void,
-  lastName: string | null,
-  setLastName: (lastName: string) => void,
-  onSaveNames: () => void,
+  fetchedFirstName: string | null,
+  fetchedLastName: string | null,
+  onSaveNames: (firstName: string, lastName: string) => void,
 }) => {
   const {
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
+    fetchedFirstName,
+    fetchedLastName,
     onSaveNames,
   } = props;
+  const [firstName, setFirstName] = useState<string>(fetchedFirstName || "");
+  const [lastName, setLastName] = useState<string>(fetchedLastName || "");
   const [fullName, setFullName] = useState<string | null>(null);
 
   useEffect(() => {
@@ -90,17 +86,17 @@ const NameEditor = (props: {
           <input
             className="text-black"
             placeholder={"First Name"}
-            value={firstName || ""}
+            value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
           <input
             className="text-black"
             placeholder={"Last Name"}
-            value={lastName || ""}
+            value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
-        <button onClick={onSaveNames}>Save</button>
+        <button onClick={() => onSaveNames(firstName, lastName)}>Save</button>
       </div>
       <div>
         {fullName && (<p>Hello, {fullName}!</p>)}
