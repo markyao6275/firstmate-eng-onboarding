@@ -31,8 +31,8 @@ async def save_name(data: Dict):
     new_first_name = data.get("first_name")
     new_last_name = data.get("last_name")
     global saved_first_name, saved_last_name
-    if new_first_name:
+    if new_first_name is not None:
         saved_first_name = new_first_name
-    if new_last_name:
+    if new_last_name is not None:
         saved_last_name = new_last_name
     return JSONResponse({ "first_name": saved_first_name, "last_name": saved_last_name })
