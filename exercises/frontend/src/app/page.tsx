@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const Home = () => {
-  const [fetchedFirstName, setFetchedFirstName] = useState<string | null>(null);
-  const [fetchedLastName, setFetchedLastName] = useState<string | null>(null);
+  const [fetchedFirstName, setFetchedFirstName] = useState<string>('');
+  const [fetchedLastName, setFetchedLastName] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchSavedNames = async () => {
@@ -61,8 +61,8 @@ export const Home = () => {
 }
 
 const NameEditor = (props: {
-  fetchedFirstName: string | null,
-  fetchedLastName: string | null,
+  fetchedFirstName: string,
+  fetchedLastName: string,
   onSaveNames: (firstName: string, lastName: string) => void,
 }) => {
   const {
@@ -70,15 +70,10 @@ const NameEditor = (props: {
     fetchedLastName,
     onSaveNames,
   } = props;
-  const [firstName, setFirstName] = useState<string>(fetchedFirstName || "");
-  const [lastName, setLastName] = useState<string>(fetchedLastName || "");
-  const [fullName, setFullName] = useState<string | null>(null);
-
-  useEffect(() => {
-    setFullName(`${firstName} ${lastName}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  const [firstName, setFirstName] = useState<string>(fetchedFirstName);
+  const [lastName, setLastName] = useState<string>(fetchedLastName);
+  const fullName = `${fetchedFirstName} ${fetchedLastName}`.trim()
+  
   return (
     <div>
       <div className="py-[12px]">
