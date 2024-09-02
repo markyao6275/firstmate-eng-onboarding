@@ -8,6 +8,7 @@ export const Home = () => {
   const [fetchedFirstName, setFetchedFirstName] = useState<string | null>(null);
   const [fetchedLastName, setFetchedLastName] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const fullName = `${fetchedFirstName} ${fetchedLastName}`
 
   const fetchSavedNames = async () => {
     setIsLoading(true);
@@ -52,6 +53,7 @@ export const Home = () => {
         <NameEditor
           fetchedFirstName={fetchedFirstName}
           fetchedLastName={fetchedLastName}
+          fullName={fullName}
           onSaveNames={saveNames}
         />
       )
@@ -63,21 +65,17 @@ export const Home = () => {
 const NameEditor = (props: {
   fetchedFirstName: string | null,
   fetchedLastName: string | null,
+  fullName: string | null,
   onSaveNames: (firstName: string, lastName: string) => void,
 }) => {
   const {
     fetchedFirstName,
     fetchedLastName,
+    fullName,
     onSaveNames,
   } = props;
   const [firstName, setFirstName] = useState<string>(fetchedFirstName || "");
   const [lastName, setLastName] = useState<string>(fetchedLastName || "");
-  const [fullName, setFullName] = useState<string | null>(null);
-
-  useEffect(() => {
-    setFullName(`${firstName} ${lastName}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div>
