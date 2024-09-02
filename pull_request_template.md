@@ -35,8 +35,8 @@ Describe test plan if necessary
 
 *Before*:
 - Description if required
-- Show evidence of reproduced issue (code, screenshots, recordings, logs, etc...)
+- Show evidence of testing (code, screenshots, recordings, logs, etc...)
 
 *After*:
 - Description if required
-- Show evidence of fixed issue (code, screenshots, recordings, logs, etc...)
+- Show evidence of testing (code, screenshots, recordings, logs, etc...)
