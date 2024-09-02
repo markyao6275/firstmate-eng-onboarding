@@ -6,12 +6,20 @@ Related to #another_issue/PR
 
 # Problem
 - Describe problem
-- Include media if necessary
 
 # Changes
 - Describe changes
 - Include concise code blocks if necessary
-- Include media if necessary
+
+# Testing
+
+*Before*:
+- Description if required
+- Show evidence of reproduced issue (code, screenshots, recordings, logs, etc...)
+
+*After*:
+- Description if required
+- Show evidence of fixed issue (code, screenshots, recordings, logs, etc...)
 
 ---
 
@@ -27,8 +35,8 @@ Describe test plan if necessary
 
 *Before*:
 - Description if required
-- Show relevant code / media
+- Show evidence of reproduced issue (code, screenshots, recordings, logs, etc...)
 
 *After*:
 - Description if required
-- Show relevant code / media
+- Show evidence of fixed issue (code, screenshots, recordings, logs, etc...)
