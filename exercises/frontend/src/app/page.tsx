@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
-export const Home = () => {
+const Home = () => {
   const [fetchedFirstName, setFetchedFirstName] = useState<string | null>(null);
   const [fetchedLastName, setFetchedLastName] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -72,12 +72,7 @@ const NameEditor = (props: {
   } = props;
   const [firstName, setFirstName] = useState<string>(fetchedFirstName || "");
   const [lastName, setLastName] = useState<string>(fetchedLastName || "");
-  const [fullName, setFullName] = useState<string | null>(null);
-
-  useEffect(() => {
-    setFullName(`${firstName} ${lastName}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const fullName = `${firstName} ${lastName}`
 
   return (
     <div>
