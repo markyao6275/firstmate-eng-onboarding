@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -72,12 +72,12 @@ const NameEditor = (props: {
   } = props;
   const [firstName, setFirstName] = useState<string>(fetchedFirstName || "");
   const [lastName, setLastName] = useState<string>(fetchedLastName || "");
-  const [fullName, setFullName] = useState<string | null>(null);
-
-  useEffect(() => {
-    setFullName(`${firstName} ${lastName}`);
+  
+  const fullName = useMemo(
+    () => `${firstName} ${lastName}`,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    [fetchedFirstName, fetchedLastName]
+  );
 
   return (
     <div>
