@@ -98,6 +98,7 @@ In general, an effective pull request (PR) makes it easy for the reviewer to und
     b. Changes to address PR comments should be in their own commit, so that the reviewer can see those changes on their own (and not review the entire PR again)
 
 4. Proofread your change before sending to the review. Check for random `console.log`s, test code, commented out code etc.
+5. Be VERY VERY careful about force pushing `main` (like `git push origin main -f`). This overwrites history and could break production. Make sure you know what you're doing if you run this command.
 
 ### Cleaning Commit History
 
