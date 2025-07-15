@@ -77,7 +77,7 @@ const NameEditor = (props: {
   useEffect(() => {
     setFullName(`${firstName} ${lastName}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchedFirstName,fetchedLastName]);
 
   return (
     <div>
@@ -99,7 +99,7 @@ const NameEditor = (props: {
         <button onClick={() => onSaveNames(firstName, lastName)}>Save</button>
       </div>
       <div>
-        {fullName && (<p>Hello, {fullName}!</p>)}
+        {fullName?.trim() && (<p>Hello, {fullName}!</p>)}
       </div>
     </div>
   );
