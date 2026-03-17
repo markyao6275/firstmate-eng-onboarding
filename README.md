@@ -1,4 +1,4 @@
-# firstmate-eng-onboarding
+# First Mate Engineering Onboarding
 Onboarding Repo for Engineers at First Mate Technologies
 
 ## General
