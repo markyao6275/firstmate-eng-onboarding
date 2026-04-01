@@ -30,6 +30,10 @@ export const Home = () => {
   }
 
   const saveNames = async (firstName: string, lastName: string) => {
+    const preUpdateNames = { fetchedFirstName, fetchedLastName };
+    setFetchedFirstName(firstName);
+    setFetchedLastName(lastName);
+
     const response = await fetch(`${SERVER_URL}/api/names`, {
       method: "POST",
       headers: {
@@ -37,6 +41,14 @@ export const Home = () => {
       },
       body: JSON.stringify({ first_name: firstName, last_name: lastName })
     });
+
+    if (!response.ok) {
+      console.error(`Failed to save names: ${response.status} ${response.statusText}`);
+      setFetchedFirstName(preUpdateNames.fetchedFirstName);
+      setFetchedLastName(preUpdateNames.fetchedLastName);
+      return;
+    }
+
     const data = await response.json();
     setFetchedFirstName(data.first_name);
     setFetchedLastName(data.last_name);
@@ -72,12 +84,7 @@ const NameEditor = (props: {
   } = props;
   const [firstName, setFirstName] = useState<string>(fetchedFirstName || "");
   const [lastName, setLastName] = useState<string>(fetchedLastName || "");
-  const [fullName, setFullName] = useState<string | null>(null);
-
-  useEffect(() => {
-    setFullName(`${firstName} ${lastName}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const fullName = `${fetchedFirstName} ${fetchedLastName}`;
 
   return (
     <div>
